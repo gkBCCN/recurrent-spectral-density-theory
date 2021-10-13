@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import joblib
 from param_file import *
-import allspike_theory
-from allspike_theory import delay_characteristic_func
-from allspike_theory import input_mean_and_intensity
+import theory
+from theory import delay_characteristic_func
+from theory import input_mean_and_intensity
 from matplotlib import rc
 rc('font', **{'size': 22, })
 
@@ -21,7 +21,7 @@ plt.plot(ks_results['freqs'][1:], X_sim_mag[1:], lw=2, c=sim_col, label='sim', z
 
 r0 = joblib.load(dp + f'ISI_ave_over_1000_trials')['r0']
 
-X_curr, X_noise, X_rm = allspike_theory.load_susceptibilities(sim_params, stat_params, dp)
+X_curr, X_noise, X_rm = theory.load_susceptibilities(sim_params, stat_params, dp)
 plt.plot(theory_freq, X_rm['mag'], c=rm_col, lw=3, ls='-', label=r'$\chi_{RM}$-with $\chi_D$', alpha=1, zorder=5)
 
 if J==0.01:
@@ -32,6 +32,7 @@ if J==0.01:
     plt.plot(theory_freq, X_no_D_mag, c='C9', lw=3, ls='-', label=r'$\chi_{RM}$-no $\chi_D$', alpha=1, zorder=5)
 
 plt.ylabel(r'$|\chi|$', rotation=0, labelpad=20)
+
 plt.xscale('log')
 xtick_arr = [0.01, 0.1, 1, r0, 10, fc]
 xtick_str = ['$10^{-2}$', '$10^{-1}$', '$10^{0}$', r'$r_0$', '$10^{1}$', '']
@@ -39,6 +40,7 @@ plt.axvline(r0, c='k', ls=':', lw=1, zorder=0)
 plt.xticks(xtick_arr, xtick_str)
 plt.xlabel('f')
 plt.xlim(0.05, fc)
+
 plt.gca().spines['right'].set_visible(0)
 plt.gca().spines['top'].set_visible(0)
 plt.ylim(0, 3)

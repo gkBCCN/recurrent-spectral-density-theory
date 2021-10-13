@@ -1,7 +1,6 @@
 import numpy as np
 import os
-
-dp = 'data/'
+from matplotlib import rc
 
 # ------------------------------------------------------------------------ #
 #                       Model Parameters                                   #
@@ -48,12 +47,25 @@ sim_params['synapse'] = synapse_params
 # ------------------------------------------------------------------------ #
 stat_params = dict()
 stat_params['N_obs'] = N_obs = 250          # size of subpopulation (number of observed neurons)
-stat_params['act_delta'] = 0.5              # Note: Use 'None' to set this dynamically
-stat_params['R0'] = 0.1                     # Average activity rate (only used if act_delta=None)
+stat_params['act_delta'] = act_delta = 0.5  # Note: Use 'None' to set this dynamically
+stat_params['R0'] = None                    # Average activity rate (only used if act_delta=None)
 stat_params['act_thresh'] = 0.2             # synchrony threshold applied to activity
 stat_params['Caa_df'] = 1/100               # subsampling when calculating the activity autocorrelation
 stat_params['theory_freq'] = np.around(np.logspace(-3, 3, 1000), 3)  # frequencies at which to calculate theory
 
-dp += f'J={J}/'
+# ------------------------------------------------------------------------ #
+#                              Save Directory                              #
+# ------------------------------------------------------------------------ #
+dp = f'data/J={J}/'
 if not os.path.exists(dp):
     os.makedirs(dp)
+
+
+# ------------------------------------------------------------------------ #
+#                           Plot Variables                                 #
+# ------------------------------------------------------------------------ #
+th_lw = 3
+rm_col = '#DF1EA8E3'
+sim_col = 'k'
+pop_th_col = '#00CBAD'
+rc('font', **{'size': 22, })
