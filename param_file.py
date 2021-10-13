@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 dp = 'data/'
 
@@ -33,7 +34,7 @@ signal_params['D'] = 1.0e-2                 # intrinsic noise intensity
 sim_params['signal'] = signal_params
 
 synapse_params = dict()
-synapse_params['J'] = 1.0e-2                # (excitatory) synaptic strength
+synapse_params['J'] = J = 1.0e-2                # (excitatory) synaptic strength
 synapse_params['g'] = 5.                    # relative inhibitory strength (4=balanced if gamma=0.25)
 synapse_params['Ci'] = 200                  # fixed number of inhibitory inputs
 synapse_params['Ce'] = Ce = 800             # fixed number of excitatory inputs
@@ -52,3 +53,7 @@ stat_params['R0'] = 0.1                     # Average activity rate (only used i
 stat_params['act_thresh'] = 0.2             # synchrony threshold applied to activity
 stat_params['Caa_df'] = 1/100               # subsampling when calculating the activity autocorrelation
 stat_params['theory_freq'] = np.around(np.logspace(-3, 3, 1000), 3)  # frequencies at which to calculate theory
+
+dp += f'J={J}/'
+if not os.path.exists(dp):
+    os.makedirs(dp)

@@ -1,12 +1,12 @@
 from mpmath import mp
 mp.dps = 20
 from param_file import sim_params, stat_params, dp
-import theory
+import allspike_theory
 
 # ------------------------------------------------------------------------------------------------------------------- #
 SUSC   = 0
+Xrm    = 1
 
-Sxs    = 0
 SXs    = 0
 SAs    = 0
 Sphis  = 0
@@ -16,7 +16,6 @@ Sii    = 0
 Cyy    = 0
 
 S0     = 0
-Sx     = 0
 SX     = 0
 SA     = 0
 Sphi   = 0
@@ -26,10 +25,14 @@ COH_Phi = 0
 
 # ------------------------------------------------------------------------------------------------------------------- #
 if SUSC:
-    print('\nRecurrence-modulated susceptibility.')
-    theory.calc_exact_diff_approx_susceptibility(sim_params, stat_params, dp)
+    print('\nSingle-neuron current- and noise-modulation susceptibilities.')
+    allspike_theory.calc_single_neuron_susceptibilities(sim_params, stat_params, dp)
 # --------------------------------------------------------------------------------------------------------------- #
-if Sxs:
+if Xrm:
+    print('\nSingle-neuron current- and noise-modulation susceptibilities.')
+    allspike_theory.calc_recurrence_modulated_susceptibility(sim_params, stat_params, dp)
+# --------------------------------------------------------------------------------------------------------------- #
+if SXs:
     from IFy.scripts.theory.cross_spectrum import *
     calc_linear_approx_of_signal_cross_spectrum_from_exact_stats(sim_params, stat_params, dp)
 # --------------------------------------------------------------------------------------------------------------- #
