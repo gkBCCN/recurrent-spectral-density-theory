@@ -12,14 +12,7 @@ Sii    = 0
 
 SYs    = 0
 
-Cyy    = 0
-
-SX     = 0
-SA     = 0
 Sphi   = 0
-
-COH_X   = 0
-COH_Phi = 0
 
 # ------------------------------------------------------------------------------------------------------------------- #
 if SUSC:
@@ -34,18 +27,14 @@ if S0:
 # --------------------------------------------------------------------------------------------------------------- #
 if Sij:
     print('Sij')
-    theory.calc_network_cross_spectra(sim_params, stat_params, dp)
+    theory.calc_spiketrain_cross_correlations(sim_params, stat_params, dp)
 if Sii:
     print('Sii')
-    theory.calc_network_auto_spectra(sim_params, stat_params, dp)
+    theory.calc_spiketrain_auto_correlations(sim_params, stat_params, dp)
 # --------------------------------------------------------------------------------------------------------------- #
 if SYs:
     theory.calc_signal_cross_spectra(sim_params, stat_params, dp)
 # --------------------------------------------------------------------------------------------------------------- #
-if Cyy:
-    print(f"Cyy: thresh={stat_params['act_thresh']}")
-    calc_sync_autocorrelation(sim_params, stat_params, dp)
-if COH_X:
-    print('\nExact COH')
-    calc_exact_subpop_coherence(sim_params, stat_params, dp)
-
+if Sphi:
+    print(f"Sphi: thresh={stat_params['act_thresh']}")
+    theory.calc_sync_power_spectrum(sim_params, stat_params, dp)
