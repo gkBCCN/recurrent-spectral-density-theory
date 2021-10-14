@@ -537,15 +537,13 @@ def activity_autocorrelation(sim_params, stat_params, save_dir):
     subsampled_freq = np.arange(0, f_nyq + df, df)
     Sa_log = activity_power_spectrum(sim_params, stat_params, save_dir)
     Sa_lin = np.interp(subsampled_freq, stat_params['theory_freq'], Sa_log)
-
-    """The n value is the size of the OUTPUT.  Because it is larger than m, the size of Sa_lin, Sa_lin is padded with
-       zeros, or is doubled with the second half (negative frequency terms) padded with zeros.
-       Then when taking the forward transform, the output will be n//2 + 1 = 2 (m - 1)//2 + 1 == m.  
-       Therefore, Caa and Sa_lin will have the same length.
-       The norm is set to None (which is the default 'backward'), meaning the ifft is normalized by 1/m_fft
-       note that m_fft * df ~ 1/dt
-
-       See notes: tangents_and_isolated_examples: FFT_scaling.ipynb
+    """
+    The n value is the size of the OUTPUT.  Because it is larger than m, the size of Sa_lin, Sa_lin is padded with
+    zeros, or is doubled with the second half (negative frequency terms) padded with zeros.
+    Then when taking the forward transform, the output will be n//2 + 1 = 2 (m - 1)//2 + 1 == m.  
+    Therefore, Caa and Sa_lin will have the same length.
+    The norm is set to None (which is the default 'backward'), meaning the ifft is normalized by 1/m_fft
+    note that m_fft * df ~ 1/dt
     """
     m_fft = f_nyq / df + 1
     assert m_fft == Sa_lin.size
