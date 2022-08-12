@@ -1,6 +1,5 @@
 # recurrent-spectral-density-theory
 This repository is a supplement to
-
 <a href=https://journals.aps.org/pre/abstract/10.1103/PhysRevE.105.044411>
 Knoll G. & Lindner B. (2022) <i>Information transmission in recurrent networks: Consequences of network noise for synchronous and asynchronous signal encoding.</i> Phys. Rev. E, 105(4):044411
 </a>
